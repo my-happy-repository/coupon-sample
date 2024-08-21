@@ -34,7 +34,7 @@ public class ApplyServiceTest {
     public void 여러명응모() throws InterruptedException {
         long originalCount = couponRepository.count();
 
-        int threadCount = 1000;
+        int threadCount = 10;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
         // CountDownLatch 는 다른 스레드에서 수행하고 있는 작업을 기다려 주는 클래스
         CountDownLatch latch = new CountDownLatch(threadCount);

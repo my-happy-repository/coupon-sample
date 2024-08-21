@@ -22,6 +22,9 @@ public class ApplyService {
     }
 
     public void apply(Long userId) {
+        // TODO
+        // Kafka / Redis 연결 확인 필요 !
+
         // 레이스 컨디션이 발생함
         // 레이스 컨디션 - 두 개의 스레드에서 공유되는 자원에 접근 시 발생
         // synchronized 를 사용 시 해결 되지만 서버가 여러개 되면 레이스 컨디션이 다시 발생
