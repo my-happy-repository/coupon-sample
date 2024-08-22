@@ -1,12 +1,12 @@
-package com.study.couponapi;
+package com.study.couponconsumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CouponApiApplication {
+public class CouponConsumerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CouponApiApplication.class, args);
+        SpringApplication.run(CouponConsumerApplication.class, args);
     }
 }

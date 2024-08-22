@@ -31,11 +31,13 @@ public class ApplyService {
         // 핵심은 Count 에 대한 정합성임
         // long count = couponRepository.count();
 
-        couponCreateProducer.create(userId);
+//        couponCreateProducer.create(userId);
 
         // Redis 를 이용하면 Single Thread 임
-        long count = couponRepository.count();
-//        long count = couponCountRepository.increment();
+
+        // DB 를 사용 시 여러 Thread 가 동시 접근 시 값이 맞지 않음 !!
+//        long count = couponRepository.count();
+        long count = couponCountRepository.increment();
 
 //        if (count > 100) {
 //            return;
