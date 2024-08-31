@@ -20,8 +20,9 @@ public class ApplyServiceTest {
     @Autowired
     private CouponRepository couponRepository;
 
+    // Transactional 어노테이션을 사용하여도 Redis 의 데이터를 Rollbak 되지 않음
     @Test
-//    @Transactional
+    @Transactional
     public void 한번만응모 () {
         long beforeCount = couponRepository.count();
         applyService.apply(1L);
@@ -34,7 +35,7 @@ public class ApplyServiceTest {
     public void 여러명응모() throws InterruptedException {
         long originalCount = couponRepository.count();
 
-        int threadCount = 10;
+        int threadCount = 1000;
         ExecutorService executorService = Executors.newFixedThreadPool(32);
         // CountDownLatch 는 다른 스레드에서 수행하고 있는 작업을 기다려 주는 클래스
         CountDownLatch latch = new CountDownLatch(threadCount);
