@@ -3,7 +3,8 @@
 #### 2. 101 개 이상이 지급되면 안된다.
 #### 3. 순간적으로 몰리는 트래픽을 버틸 수 있어야 한다.
 
-### Kafka
+***
+### Kafka 실행
 #### 분산 이벤트 스트리밍 플랫폼
 #### 이벤트 스트리밍이란 소스에서 목적지 까지 이벤트를 실시간으로 스트리밍 하는 것
 
@@ -15,8 +16,10 @@
 
 ### Docker Consumer 실행
 #### docker exec -it kafka kafka-console-consumer.sh --topic coupon_create --bootstrap-server localhost:9092
-
-### Docker Redis 접속
+***
+### Redis 실행
+#### 1. Docker Redis Image 사용
+#### Docker Redis 접속
 #### docker exec -it {{ container-name }} redis-cli
 #### flushall 가지고 있는 값을 모두 날림
 #### keys * 현재 Redis 에 있는 모든 key 값 들을 조회

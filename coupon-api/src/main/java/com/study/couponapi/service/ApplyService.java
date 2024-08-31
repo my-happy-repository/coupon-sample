@@ -37,7 +37,11 @@ public class ApplyService {
 
         // DB 를 사용 시 여러 Thread 가 동시 접근 시 값이 맞지 않음 !!
 //        long count = couponRepository.count();
+        // TOOD - Test 진행이 더 필요 .... ! 숫자를 잘 못가져오는 듯 확인이 필요 .... !!
         long count = couponCountRepository.increment();
+
+
+
 
 //        if (count > 100) {
 //            return;
@@ -46,9 +50,9 @@ public class ApplyService {
         // TODO - Redis 연결 제대로 하기 !
         // 만약 쿠폰 발급 갯수가 늘어나면 RDB 에 부하가 걸림
         // NGrinder 로 실습 시 DB 에 부하가 많이 걸려 에러가 발생하게 됨 !
-//        couponRepository.save(
-//            new Coupon(userId)
-//        );
+        couponRepository.save(
+            new Coupon(userId)
+        );
 
         // 직접 생성을 하는 것이아닌 Kafka 를 통하여 전달
  //       couponCreateProducer.create(userId);
