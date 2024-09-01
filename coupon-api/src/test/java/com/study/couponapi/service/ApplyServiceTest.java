@@ -52,13 +52,45 @@ public class ApplyServiceTest {
         }
 
         latch.await();
-
-        long count = couponRepository.count();
         // 테스트 케이스가 실패 함, 실패한 이유는 레이스 컨디션이 실패함
         // 여러개 스레드가 공유 되는 자원에 접근하려고 할 때 레이스 컨디션이 발생함
 
         // Consumer 에서 다 저장하기 떄 까지 기다리기 위하여 Thread Sleep 을 걸어 줌
-        Thread.sleep(10000);
+        Thread.sleep(5000);
+
+        long count = couponRepository.count();
+
+        // Redis 로 변경을 하여 테스트에 성공함
+        Assertions.assertEquals(originalCount + 100, count);
+    }
+
+    @Test
+    public void 한명당_한개의_쿠폰만_발급_가능() throws InterruptedException {
+        long originalCount = couponRepository.count();
+
+        int threadCount = 1000;
+        ExecutorService executorService = Executors.newFixedThreadPool(32);
+        // CountDownLatch 는 다른 스레드에서 수행하고 있는 작업을 기다려 주는 클래스
+        CountDownLatch latch = new CountDownLatch(threadCount);
+
+        for (int i = 0; i < threadCount; i++) {
+            executorService.submit(() -> {
+                try {
+                    applyService.apply(1L);
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+
+        latch.await();
+        // 테스트 케이스가 실패 함, 실패한 이유는 레이스 컨디션이 실패함
+        // 여러개 스레드가 공유 되는 자원에 접근하려고 할 때 레이스 컨디션이 발생함
+
+        // Consumer 에서 다 저장하기 떄 까지 기다리기 위하여 Thread Sleep 을 걸어 줌
+        Thread.sleep(5000);
+
+        long count = couponRepository.count();
 
         // Redis 로 변경을 하여 테스트에 성공함
         Assertions.assertEquals(originalCount + 100, count);
