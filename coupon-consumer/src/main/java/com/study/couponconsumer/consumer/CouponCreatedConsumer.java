@@ -33,6 +33,7 @@ public class CouponCreatedConsumer {
         } catch (Exception e) {
             logger.error("Kafka Consumer Error Message, UserID : {} , {}", e.getMessage(), userId);
             // Consumer 에서 쿠폰 발급에 실패한 UserId 는 DB 에 따로 데이터를 넣어줌
+            // 만약 FailedEvent 에 데이터를 넣어주고 Batch 를 작동 시키는 것도 좋은 방법임 !
             failedEventRepository.save(new FailedEvent(userId));
         }
     }
