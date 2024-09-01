@@ -13,7 +13,7 @@
 #### 이벤트 스트리밍이란 소스에서 목적지 까지 이벤트를 실시간으로 스트리밍 하는 것
 
 ### Docker Kafka Topic 리스트 확인
-#### docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 --list
+#### docker exec -it kafka /opt/kafka_2.12-2.5.0/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
 
 ### Docker Kafka topic coupon_create 생성 명령어
 #### docker exec -it kafka kafka-console-producer.sh --topic coupon_create --broker-list 0.0.0.0:9092
